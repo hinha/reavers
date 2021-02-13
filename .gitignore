@@ -15,4 +15,5 @@
 # vendor/
 
 .idea/
+adminlte/
 config.prod.yml

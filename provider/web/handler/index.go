@@ -34,7 +34,7 @@ func (p *IndexPage) Middleware(handlerFunc echo.HandlerFunc) echo.HandlerFunc {
 
 // Handle health which always return 200
 func (p *IndexPage) Handle(context provider.WebContext) {
-	_ = context.Render(http.StatusOK, "index.html", map[string]interface{}{
+	_ = context.Render(http.StatusOK, "index.tmpl", map[string]interface{}{
 		"title": "Test Twitter",
 	})
 }

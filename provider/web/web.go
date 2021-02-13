@@ -67,10 +67,10 @@ func (w *WEB) Run() error {
 		},
 	}))
 	w.engine.Static("/", "assets")
-	renderer := &TemplateRenderer{
-		templates: template.Must(template.ParseGlob("templates/*.html")),
+	w.engine.Renderer = &TemplateRenderer{
+		templates: template.Must(template.ParseGlob("templates/*.tmpl")),
 	}
-	w.engine.Renderer = renderer
+
 	w.Inject(handler.NewIndexPage())
 	return w.engine.Start(fmt.Sprintf(":%d", w.port))
 }
