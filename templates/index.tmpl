@@ -27,7 +27,8 @@
     <link rel="stylesheet" href="dist/bootstrap-daterangepicker/daterangepicker.css">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-   
+    <!-- Custom -->
+    <link rel="stylesheet" href="dist/css/admin.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -42,8 +43,14 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
     {{template "main_header" . }}
+    
+    <div class="content-wrapper">
+      {{template "content_trello" .}}
+      {{template "content_project" .}}
+    </div>
+    <!-- /.content-wrapper -->
     {{template "aside" . }}
-    {{template "content" .}}
+    
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.4.18
@@ -254,6 +261,39 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button);
+</script>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
+
+// Tab Menu
+function openContent(evt, contentName) {
+    var i, tabcontent, tablinks;
+    // Shiny.unbindAll();
+    tabcontent = document.getElementsByClassName("content");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("menu-links");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    if (contentName == "contentTrello") {
+      document.getElementById(contentName).style.display = "block";
+      evt.currentTarget.className += " active";
+      //document.getElementById("navbarForm").style.display = "block";
+    } else {
+      console.log(contentName);
+      document.getElementById(contentName).style.display = "block";
+      evt.currentTarget.className += " active";
+      //document.getElementById("navbarForm").style.display = "none";
+    }
+
+}
+  
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="dist/bootstrap/js/bootstrap.min.js"></script>
